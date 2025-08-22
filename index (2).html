@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Teacher's Day</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: textGlow 2s infinite alternate;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .content {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .message-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .message-box h2 {
+            color: #ff5e62;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .message-box p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .quote-box {
+            background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .quote {
+            font-size: 1.4rem;
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .author {
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        .animation-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .animated-icon {
+            font-size: 2.5rem;
+            color: #ff5e62;
+            animation: bounce 2s infinite;
+        }
+        
+        .animated-icon:nth-child(2) {
+            animation-delay: 0.3s;
+            color: #ff9966;
+        }
+        
+        .animated-icon:nth-child(3) {
+            animation-delay: 0.6s;
+            color: #6c757d;
+        }
+        
+        .students-section {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .show-students-btn {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .show-students-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .show-students-btn:active {
+            transform: translateY(0);
+        }
+        
+        .students-container {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 1s ease;
+        }
+        
+        .students-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .student-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .student-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .student-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.1rem;
+        }
+        
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes textGlow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            to {
+                text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.6), 
+                             2px 2px 30px rgba(255, 255, 255, 0.4);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .floating-element {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.7;
+            z-index: 1;
+        }
+        
+        .floating-element:nth-child(1) {
+            top: 50px;
+            left: 50px;
+            animation: float 8s infinite;
+            color: #ff9966;
+        }
+        
+        .floating-element:nth-child(2) {
+            top: 100px;
+            right: 70px;
+            animation: float 10s infinite;
+            color: #ff5e62;
+            animation-delay: 1s;
+        }
+        
+        .floating-element:nth-child(3) {
+            bottom: 120px;
+            left: 70px;
+            animation: float 9s infinite;
+            color: #6c757d;
+            animation-delay: 0.5s;
+        }
+        
+        .floating-element:nth-child(4) {
+            bottom: 80px;
+            right: 90px;
+            animation: float 7s infinite;
+            color: #ff9966;
+            animation-delay: 1.5s;
+        }
+        
+        .auto-confetti-toast {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            animation: slideDown 1s ease-out forwards, glow 2s infinite alternate;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        @keyframes slideDown {
+            from { 
+                top: -100px;
+                opacity: 0;
+            }
+            to { 
+                top: 30px;
+                opacity: 1;
+            }
+        }
+        
+        @keyframes glow {
+            from { 
+                box-shadow: 0 0 10px #ffcc33, 0 0 20px #ff9933;
+            }
+            to { 
+                box-shadow: 0 0 25px #ff9933, 0 0 40px #ffcc33;
+            }
+        }
+        
+        .auto-confetti-toast i {
+            animation: spin 1.5s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Floating decorative elements -->
+        <div class="floating-element">🌹</div>
+        <div class="floating-element">📚</div>
+        <div class="floating-element">🍎</div>
+        <div class="floating-element">✏️</div>
+        
+        <div class="header">
+            <h1>Happy Teacher's Day</h1>
+            <p>Today we celebrate and honor the guiding lights who shape our future with patience, knowledge, and dedication.</p>
+        </div>
+        
+        <div class="content">
+            <div class="message-box">
+                <h2>A Message of Gratitude</h2>
+                <p>Dear Teachers,</p>
+                <p>Your influence extends far beyond the classroom. You have not only taught us subjects but also values, discipline, and the importance of dreaming big.</p>
+                <p>You've shown patience when we struggled, provided encouragement when we doubted ourselves, and celebrated our successes as if they were your own.</p>
+                <p>Today, we honor you and express our deepest gratitude for the incredible impact you've made on our lives.</p>
+                
+                <div class="animation-box">
+                    <div class="animated-icon"><i class="fas fa-book"></i></div>
+                    <div class="animated-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="animated-icon"><i class="fas fa-lightbulb"></i></div>
+                </div>
+            </div>
+            
+            <div class="quote-box">
+                <p class="quote">"A good teacher can inspire hope, ignite the imagination, and instill a love of learning."</p>
+                <p class="author">- Brad Henry</p>
+                
+                <p class="quote" style="margin-top: 30px;">"Teaching is the greatest act of optimism."</p>
+                <p class="author">- Colleen Wilcox</p>
+            </div>
+        </div>
+        
+        <div class="students-section">
+            <button class="show-students-btn" id="showStudentsBtn">
+                <i class="fas fa-users"></i>
+                Created by All Boys Students
+            </button>
+            
+            <div class="students-container" id="studentsContainer">
+                <h3>With gratitude from:</h3>
+                <div class="students-list">
+                    <div class="student-card">
+                        <div class="student-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4>Rahim Khan</h4>
+                        <p>Class 10-A</p>
+                    </div>
+                    <div class="student-card">
+                        <div class="student-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4>Karim Ahmed</h4>
+                        <p>Class 10-A</p>
+                    </div>
+                    <div class="student-card">
+                        <div class="student-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4>Shafiq Islam</h4>
+                        <p>Class 10-A</p>
+                    </div>
+                    <div class="student-card">
+                        <div class="student-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4>Jamil Hossain</h4>
+                        <p>Class 10-A</p>
+                    </div>
+                    <div class="student-card">
+                        <div class="student-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4>Tanvir Rahman</h4>
+                        <p>Class 10-A</p>
+                    </div>
+                    <div class="student-card">
+                        <div class="student-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4>Arif Hasan</h4>
+                        <p>Class 10-A</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Made with ❤️ for educators everywhere | Happy Teacher's Day 2023</p>
+        </div>
+    </div>
+    
+    <div class="auto-confetti-toast">
+        <i class="fas fa-spinner"></i>
+        <span>Celebrating Teacher's Day with auto animations!</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto confetti launch on page load
+            setTimeout(launchConfetti, 800);
+            
+            // Repeated confetti launches
+            setInterval(launchConfetti, 8000);
+            
+            // Function to launch confetti
+            function launchConfetti() {
+                confetti({
+                    particleCount: 120,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#ff9966', '#ff5e62', '#ffcc33', '#ffffff']
+                });
+                
+                // Additional confetti from sides
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 80,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 }
+                    });
+                    
+                    confetti({
+                        particleCount: 80,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 }
+                    });
+                }, 300);
+            }
+            
+            // Hide toast after 5 seconds
+            setTimeout(() => {
+                const toast = document.querySelector('.auto-confetti-toast');
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 1s ease-out';
+            }, 5000);
+            
+            // Show students functionality
+            const showStudentsBtn = document.getElementById('showStudentsBtn');
+            const studentsContainer = document.getElementById('studentsContainer');
+            
+            showStudentsBtn.addEventListener('click', function() {
+                if (studentsContainer.style.display === 'block') {
+                    studentsContainer.style.display = 'none';
+                    showStudentsBtn.innerHTML = '<i class="fas fa-users"></i> Created by All Boys Students';
+                } else {
+                    studentsContainer.style.display = 'block';
+                    showStudentsBtn.innerHTML = '<i class="fas fa-times"></i> Hide Students';
+                    
+                    // Launch extra confetti when showing students
+                    launchConfetti();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
